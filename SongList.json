@@ -1,0 +1,64 @@
+{	
+	"record": [
+		{
+			"artist": "Elton John",
+			"title": "Crocodile Rock",
+			"genre": "Classic Rock",
+			"year": "1973"
+		},
+		{
+			"artist": "Russell Dickerson",
+			"title": "Every Little Thing",
+			"genre": "Pop Country",
+			"year": "1964"
+		},
+		{
+			"artist": "Asia",
+			"title": "Heat of the Moment",
+			"genre": "Hard Rock",
+			"year": "1982"
+		},
+		{
+			"artist": "One Direction",
+			"title": "You and I",
+			"genre": "Pop",
+			"year": "2013"
+		},
+		{
+			"artist": "Zac Brown Band",
+			"title": "Chicken Fried",
+			"genre": "Country",
+			"year": "2005"
+		},
+		{
+			"artist": "Plain White T's",
+			"title": "Hey There Delilah",
+			"genre": "Alternative",
+			"year": "2006"
+		},
+		{
+			"artist": "Train",
+			"title": "Lost and Found",
+			"genre": "Pop Rock",
+			"year": "2017"
+		},
+		{
+			"artist": "Elton John",
+			"title": "Your Song",
+			"genre": "Classic Rock",
+			"year": "1970"
+		},
+		{
+			"artist": "Ed Sheeran",
+			"title": "Nancy Mulligan",
+			"genre": "Pop",
+			"year": "2017"
+		},
+		{
+			"artist": "Billy Joel",
+			"title": "Uptown Girl",
+			"genre": "Classic Rock",
+			"year": "1983"
+		}
+	]
+}

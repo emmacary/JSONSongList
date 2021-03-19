@@ -1,0 +1,63 @@
+<html>
+<head>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"> </script>
+
+<script>
+$(document).ready(function () { 
+  
+                    // FETCHING DATA FROM JSON FILE 
+                    $.getJSON("SongList.json",  
+                            function (data) { 
+                        var record = ''; 
+  
+                        // ITERATING THROUGH OBJECTS 
+                        $.each(data, function (key, value) { 
+  
+                            //CONSTRUCTION OF ROWS HAVING 
+                            // DATA FROM JSON OBJECT 
+                            record += '<tr>'; 
+                            record += '<td>' +  
+                                value.artist + '</td>'; 
+  
+                            record += '<td>' +  
+                                value.song + '</td>'; 
+  
+                            record += '<td>' +  
+                                value.genre + '</td>'; 
+  
+                            record += '<td>' +  
+                                value.year + '</td>'; 
+  
+                            record += '</tr>'; 
+                        }); 
+                          
+                        //INSERTING ROWS INTO TABLE  
+                        $('#table').append(record); 
+                    }); 
+                }); 
+
+</script>
+</head>
+
+<body>
+
+
+<div class="wrapper">
+<div class="profile">
+   <table id= "userdata" border="2">
+        <thead>
+            <th>Artist</th>
+            <th>Song</th>
+            <th>Genre</th>
+            <th>Year Released</th>
+        </thead>
+      <tbody>
+
+       </tbody>
+   </table>
+
+</div>
+</div>
+
+</body>
+</html>
