@@ -1,62 +1,128 @@
+<!doctype html>
 <html>
 <head>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"> </script>
+<script type="JSON" src="SongList.json"></script>
 
-<script>
-$(document).ready(function () { 
-  
-                    // FETCHING DATA FROM JSON FILE 
-                    $.getJSON("SongList.json",  
-                            function (data) { 
-                        var record = ''; 
-  
-                        // ITERATING THROUGH OBJECTS 
-                        $.each(data, function (key, value) { 
-  
-                            //CONSTRUCTION OF ROWS HAVING 
-                            // DATA FROM JSON OBJECT 
-                            record += '<tr>'; 
-                            record += '<td>' +  
-                                value.artist + '</td>'; 
-  
-                            record += '<td>' +  
-                                value.song + '</td>'; 
-  
-                            record += '<td>' +  
-                                value.genre + '</td>'; 
-  
-                            record += '<td>' +  
-                                value.year + '</td>'; 
-  
-                            record += '</tr>'; 
-                        }); 
-                          
-                        //INSERTING ROWS INTO TABLE  
-                        $('#table').append(record); 
-                    }); 
-                }); 
+<style>
+    body {
+        background-color: #d2f7f4;
+    }
+
+    h1 {
+         font-family: Papyrus, fantasy;
+         text-align: center;
+    }
+
+    h2 {
+        font-size: 150%;
+        font-family: Papyrus, fantasy;
+    }
+
+    #rawstring {
+        border: 40px solid #5b4fb8;
+        padding: 5%;
+    }
+
+    #display {
+        font-size: 150%;
+        border: 40px solid #29948b;
+        padding: 5%;
+    }
+
+    #interact {
+        font-size: 150%;
+        border: 40px solid #8a0067;
+        padding: 5%;
+    }
+
+    #filteredData {
+        text-align: center;
+        font-size: 300%;
+        font-family: Papyrus, fantasy;
+    } 
+
+    #genres {
+        color: #8a0067;
+    }
+</style>
+
+<script language="javascript">
+    var strObj;
+    var parseObj;
+    var data;
+
+    document.addEventListener("DOMContentLoaded", onReady);
+    function onReady() {
+        var req = new XMLHttpRequest();
+        req.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                strObj = JSON.stringify(this.responseText);
+                parseObj = JSON.parse(this.responseText);
+
+                //Present raw string
+                document.getElementById("rawstring").innerHTML = strObj + "<br><br>";
+
+                var str = "";
+                //Present readable structure
+                for (var i = 0; i < 10; i++) {
+                    var curr = parseObj.record[i];
+                    str += curr.title + "<br>";
+                    str += "Artist: " + curr.artist + "<br>";
+                    str += "Genre: " + curr.genre + "<br>";
+                    str += "Released in " + curr.year + "<br><br>";
+                    console.log(str);
+                    document.getElementById("display").innerHTML = str;
+                }
+
+                //Filter based on genre and present data
+                $('#genres').change(function () {
+                    //Reset the div text every time it runs
+                    document.getElementById("filteredData").innerHTML = null;
+                    
+                    //Filter based on genre
+                    var filter = $('#genres').val();
+                    var returnedData = $.grep(parseObj.record, function (element, index) {
+                        return element.genre == filter; 
+                    });
+                    
+                    //Display filtered array
+                    for (var i = 0; i < returnedData.length; i++) {
+                        document.getElementById("filteredData").innerHTML += returnedData[i].title + "<br>";
+                    }
+                });
+            }    
+        }
+        req.open("GET", "https://raw.githubusercontent.com/emmacary/JSONSongList/main/SongList.json", true);
+        req.send();
+    }
 
 </script>
 </head>
 
 <body>
 
-
-<div class="wrapper">
-<div class="profile">
-   <table id= "userdata" border="2">
-        <thead>
-            <th>Artist</th>
-            <th>Song</th>
-            <th>Genre</th>
-            <th>Year Released</th>
-        </thead>
-      <tbody>
-
-       </tbody>
-   </table>
-
-</div>
+<div class="content">
+    <h1>My work with JSON data! </h1>
+    <h2> Here is the raw string of the json data: </h2>
+    <p id="rawstring"></p><br><br>
+    <h2> Here is the nicely displayed json data: </h2>
+    <p id="display"></p><br><br>
+    <h2> Here is where you can filter the json data based on genre: </h2>
+    <div id="interact">
+        <label for="dropdown">Choose a genre to filter by:</label>
+            <select name="genres" id="genres">
+                <option value="Classic Rock">Classic Rock</option>
+                <option value="Pop Country">Pop Country</option>
+                <option value="Hard Rock">Hard Rock</option>
+                <option value="Pop">Pop</option>
+                <option value="Country">Country</option>
+                <option value="Alternative">Alternative</option>
+                <option value="Pop Rock">Pop Rock</option>
+            </select>
+            <p id="filteredData"></p>
+            <br><br><br><br>
+    </div>
 </div>
 
 </body>
